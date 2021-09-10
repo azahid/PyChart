@@ -27,12 +27,12 @@ class T(chart_object.T):
     __doc__ = range_plot_doc.doc
     keys = {
         "data" : (AnyType, None, pychart_util.data_desc),
-        "label": (StringType, "???", pychart_util.label_desc),
-        "xcol" : (IntType, 0, pychart_util.xcol_desc),
-        "min_col": (IntType, 1,
+        "label": (bytes, "???", pychart_util.label_desc),
+        "xcol" : (int, 0, pychart_util.xcol_desc),
+        "min_col": (int, 1,
                    "The lower bound of the sweep is extracted from "
                    + "this column of data."),
-        "max_col": (IntType, 2, 
+        "max_col": (int, 2,
                    "The upper bound of the sweep is extracted from "
                    + "this column of data."),
         "line_style": (line_style.T, line_style.default,

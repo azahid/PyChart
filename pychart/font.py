@@ -18,6 +18,7 @@ from . import pychart_util
 import re
 from . import theme
 from .afm import dir
+from . import afm
 
 __doc__ = """The module for manipulating texts and their attributes.
 
@@ -218,12 +219,12 @@ class text_state:
         
 class text_iterator:
     def __init__(self, s):
-        self.str = unicode(s)
+        self.str = str(s)
         self.i = 0
         self.ts = text_state()
         self.stack = []
     def reset(self, s):
-        self.str = unicode(s)
+        self.str = str(s)
         self.i = 0
 
     def __return_state(self, ts, str):
@@ -260,7 +261,8 @@ class text_iterator:
                self.str[self.i] == '-'):
             self.i += 1
         return int(self.str[istart:self.i])
-    def next(self):
+
+    def __next__(self):
         "Get the next text segment. Return an 8-element array: (FONTNAME, SIZE, LINEHEIGHT, COLOR, H_ALIGN, V_ALIGN, ANGLE, STR."
         l = []
         changed = 0
@@ -372,7 +374,7 @@ def unaligned_get_dimension(text):
     halign = None
     valign = None
     itr = text_iterator(None)
-    for line in unicode(text).split('\n'):
+    for line in str(text).split('\n'):
         cur_height = 0
         cur_width = 0
         itr.reset(line)
@@ -383,13 +385,13 @@ def unaligned_get_dimension(text):
             (font, size, line_height, color, new_h, new_v, new_a, chunk) = elem
             if halign != None and new_h != halign:
                 raise FontException('Only one "/h" can appear in a string.',
-                                    unicode(text))
+                                    str(text))
             if valign != None and new_v != valign:
                 raise FontException('Only one "/v" can appear in a string.',
-                                    unicode(text))
+                                    str(text))
             if angle != None and new_a != angle:
                 raise FontException('Only one "/a" can appear in a string.',
-                                    unicode(text))
+                                    str(text))
             halign = new_h
             valign = new_v
             angle = new_a

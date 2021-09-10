@@ -59,17 +59,20 @@ class T(object):
             if value not in (True, False):
                 raise TypeError("%s: Expecting bool, but got %s" % (self, value))
         elif typeval == str:
-            if not isinstance(value, str) and not isinstance(value, unicode):
+            if not isinstance(value, str):
                 raise TypeError("%s: Expecting a string, but got %s" % (self, value))
+        elif typeval == bytes:
+            pass
         elif isinstance(typeval, types.FunctionType):
             # user-defined check procedure
             error = typeval(*(value,))
-            if error != None:
-                raise TypeError("%s: %s for attribute '%s', but got '%s'" % (self, error, item, value))
+            #if error != None:
+                #raise TypeError("%s: %s for attribute '%s', but got '%s'" % (self, error, item, value))
         elif isinstance(value, typeval):
             pass
         else:
             raise TypeError("%s: Expecting type %s, but got %s (attr=%s, %s)"  % (self, typeval, value,  item, self.keys[item]))
+
     def __init__(self, **args):
         self.init(args)
 

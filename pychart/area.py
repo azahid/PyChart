@@ -88,7 +88,7 @@ _keys = {
                         "The vertical grid-line interval. See also x_grid_interval"),
     "x_grid_over_plot": (bool, False,
                       "If True, grid lines are drawn over plots. Otherwise, plots are drawn over grid lines."),
-    "y_grid_over_plot": (IntType, False, "See x_grid_over_plot."),
+    "y_grid_over_plot": (int, False, "See x_grid_over_plot."),
     "legend": (legend.T, _dummy_legend, "The legend of the chart.",
                """a legend is by default displayed
                in the right-center of the chart. If you don't want to draw
@@ -241,7 +241,7 @@ class T(chart_object.T):
                 entry = plot.get_legend_entry()
                 if entry == None:
                     pass
-                elif type(entry) != ListType:
+                elif type(entry) != list:
                     legends.append(entry)
                 else:
                     for e in entry:

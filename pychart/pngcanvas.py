@@ -48,9 +48,9 @@ class T(gs_frontend.T):
         self.close_gs()
 
         if temp_fname:
-            temp_fd = file(temp_fname, 'rb')
-            out_fd.write(temp_fd.read())
+            temp_fd = open(temp_fname, 'rb')
+            out_fd.buffer.write(temp_fd.read())
             temp_fd.close()
-            
+
 
 

@@ -34,7 +34,7 @@ class Entry(chart_object.T):
             "tick_mark": (tick_mark.T, None, ""),
             "line_style": (line_style.T, None, ""),
             "fill_style": (fill_style.T, None, ""),
-            "label": (StringType, "???", ""),
+            "label": (bytes, "???", ""),
             }
     __doc__ = legend_doc.doc_entry
 ##AUTOMATICALLY GENERATED
@@ -117,7 +117,7 @@ class T(chart_object.T):
                 """Bottom-left corner of the legend.
                 The default location of a legend is the bottom-right end of the chart."""),
         "shadow": (ShadowType, None, pychart_util.shadow_desc),
-        "nr_rows": (IntType, 9999, "Number of rows in the legend. If the number of plots in a chart is larger than nr_rows, multiple columns are created in the legend."),
+        "nr_rows": (int, 9999, "Number of rows in the legend. If the number of plots in a chart is larger than nr_rows, multiple columns are created in the legend."),
 
         }
 ##AUTOMATICALLY GENERATED
@@ -132,8 +132,8 @@ class T(chart_object.T):
             y = self.loc[1]
 
         nr_rows = min(self.nr_rows, len(entries))
-        nr_cols = (len(entries)-1) / nr_rows + 1
-        
+        nr_cols = int((len(entries)-1) / nr_rows + 1)
+
         ymin = y
         max_label_width = [0] * nr_cols
         max_sample_width = [0] * nr_cols
